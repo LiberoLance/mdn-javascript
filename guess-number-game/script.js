@@ -15,7 +15,7 @@ function checkGuess() {
 	if(guessCount == 1) {
 		guesses.textContent = 'Previous guesses: ';
 	}
-	guesses.textContent += `${userGuess}`;
+	guesses.textContent += ` ${userGuess}`;
 
 	if (userGuess === randomNumber) {
 		lastResult.textContent = 'Congratulations! You got it right!';
@@ -42,3 +42,32 @@ function checkGuess() {
 }
 
 guessSubmit.addEventListener('click', checkGuess);
+
+function setGameOver() {
+	guessField.disabled = true;
+	guessSubmit.disabled = true;
+	resetButton = document.createElement('button');
+	resetButton = textcontent = 'start new game';
+	document.body.appen(resetButton);
+	resetButton.addEventListener('click', resetGame);
+}
+
+function resetGame() {
+	guessCount = 1;
+
+	const resetParas = document.querySelectorAll('.resultParas p');
+	for(const resetPara of resetParas) {
+		resetPara.textContent = '';
+	}
+	
+	resetButton.parentNode.removeChild(resetButton);
+
+	guessField.disable = 'false';
+	guessSubmit.disable = 'false';
+	guessField.value = '';
+	guessField.focus();
+
+	lastResult.style.backgroundColor = 'white';
+
+	randomNumber = Math.floor(Math.random() * 100) + 1;
+}
